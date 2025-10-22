@@ -7,7 +7,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:5173",
-    "https://my-homepage-5ir.pages.dev/"
+    "https://my-homepage-5ir.pages.dev"
 ]
 
 app.add_middleware(
