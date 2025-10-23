@@ -48,28 +48,32 @@ def get_gamesradar():
     except Exception as e:
         return f"Ocorreu um erro ao processar o HTML: {e}"
     
-def get_forbes():
+def get_infomoney():
     try:
-        response = requests.get('https://forbes.com.br/')
+        response = requests.get('https://www.infomoney.com.br/')
         response.raise_for_status()
 
         soup = BeautifulSoup(response.text, 'lxml')
-        container_noticia = soup.find('li', class_='manchete_loop_1')
 
-        if container_noticia:
-            titulo_tag = container_noticia.find('h3')
+        meta_tag = soup.find('meta', attrs={'name': 'description'})
 
-            if titulo_tag:
-                return titulo_tag.get_text(strip=True)
+        if meta_tag and meta_tag.has_attr('content'):
+            full_content = meta_tag['content']
+            
+            if full_content.startswith("Publicidade "):
+                headlines_text = full_content.replace("Publicidade ", "", 1)
             else:
-                return "Erro: Não foi possível encontrar a tag do título."
+                headlines_text = full_content
+
+            primeira_noticia = headlines_text.split("Medidas antidumping")[0]
+            return primeira_noticia.strip()
         
-        return "Erro: Não foi possível encontrar o contêiner da notícia principal."
+        return "Erro: Não foi possível encontrar a meta tag de descrição."
 
     except requests.exceptions.RequestException as e:
         return f"Ocorreu um erro na requisição: {e}"
     except Exception as e:
-        return f"Ocorreu um erro ao processar o HTML: {e}"   
+        return f"Ocorreu um erro ao processar o HTML: {e}" 
 
 def get_g1():
     try:
@@ -111,6 +115,24 @@ def get_cnn():
                 return "Erro: Não foi possível encontrar a tag <h2> com o título."
         
         return "Erro: Não foi possível encontrar o contêiner da notícia principal."
+
+    except requests.exceptions.RequestException as e:
+        return f"Ocorreu um erro na requisição: {e}"
+    except Exception as e:
+        return f"Ocorreu um erro ao processar o HTML: {e}"
+    
+def get_terra():
+    try:
+        response = requests.get('https://www.terra.com.br/')
+        response.raise_for_status()
+
+        soup = BeautifulSoup(response.text, 'lxml')
+        headline_link = soup.find('a', class_='card-news__text--title')
+
+        if headline_link:
+            return headline_link.get_text(strip=True)
+        else:
+            return "Erro: Não foi possível encontrar o link da notícia principal."
 
     except requests.exceptions.RequestException as e:
         return f"Ocorreu um erro na requisição: {e}"
