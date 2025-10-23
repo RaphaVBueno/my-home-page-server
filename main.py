@@ -28,6 +28,6 @@ async def root():
     cnn = get_cnn()
     terra = get_terra()
     return [{"id": 1, "title": games_radar, "url": "https://www.gamesradar.com/", "source": "gamesradar"}, {"id": 2, "title": games_pot, "url": "https://www.gamespot.com/", "source": "gamespot"}, 
-            {"id": 3,  "title": infomoney, "url": "https://www.infomoney.com.br/", "source": "forbes"}, {"id": 4,  "title": g1, "url": "https://g1.globo.com/", "source": "g1"}, 
+            {"id": 3,  "title": infomoney, "url": "https://www.infomoney.com.br/", "source": "infomoney"}, {"id": 4,  "title": g1, "url": "https://g1.globo.com/", "source": "g1"}, 
             {"id": 5,   "title": cnn, "url": "https://www.cnnbrasil.com.br/", "source": "cnn"}, {"id": 6,   "title": terra, "url": "https://www.terra.com.br/", "source": "terra"}]
 
