@@ -1,52 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-def get_gamespot():
-    try:
-        response = requests.get('https://www.gamespot.com/')
-        response.raise_for_status()
 
-        soup = BeautifulSoup(response.text, 'lxml')
-        container_noticia = soup.find('section', class_='promo--container')
-
-        if container_noticia:
-            link_noticia = container_noticia.find('a', class_='promo--offset-wide')
-            
-            if link_noticia:
-                titulo_tag = link_noticia.find('h2')
-
-                if titulo_tag:
-                    return titulo_tag.get_text(strip=True)
-
-        return "Erro: Não foi possível encontrar o título da notícia principal."
-
-    except requests.exceptions.RequestException as e:
-        return f"Ocorreu um erro na requisição: {e}"
-    except Exception as e:
-        return f"Ocorreu um erro ao processar o HTML: {e}"
-    
-def get_gamesradar():
-    try:
-        response = requests.get('https://www.gamesradar.com/')
-        response.raise_for_status()
-
-        soup = BeautifulSoup(response.text, 'lxml')
-        container_noticia = soup.find('div', class_='feature-block-item-wrapper item-1')
-
-        if container_noticia:
-            titulo_tag = container_noticia.find('span', class_='article-name')
-            
-            if titulo_tag:
-                return titulo_tag.get_text(strip=True)
-            else:
-                return "Erro: Não foi possível encontrar a tag do título."
-
-        return "Erro: Não foi possível encontrar o contêiner da notícia principal."
-
-    except requests.exceptions.RequestException as e:
-        return f"Ocorreu um erro na requisição: {e}"
-    except Exception as e:
-        return f"Ocorreu um erro ao processar o HTML: {e}"
     
 def get_infomoney():
     try:
