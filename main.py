@@ -60,14 +60,14 @@ async def root():
             fetch_news(client, 'https://www.gamespot.com/', 'section', 'promo--container', 'h2'),
             # GAME SPOT - Últimas
             fetch_news(client, 'https://www.gamespot.com/', 'section', None, 'h4', 'card-item__title', container_id='river'),
+            # IGN BRASIL
+            fetch_news(client, 'https://br.ign.com/cinema-tv', 'section', 'broll', 'span', 'caption'),
             # ADRENALINE
             fetch_news(client, 'https://www.adrenaline.com.br/hardware/', 'h2', 'feed-title'),
             # G1
             fetch_news(client, 'https://g1.globo.com/', 'div', 'feed-post-body-title', 'p'),
             # NOSSO PALESTRA
             fetch_news(client, 'https://nossopalestra.com.br/', 'h2', 'post-title-feed-sm'),
-            # IGN BRASIL
-            fetch_news(client, 'https://br.ign.com/cinema-tv', 'section', 'broll', 'span', 'caption'),
             # INFOMONEY
             fetch_news(client, 'https://www.infomoney.com.br/', is_meta=True),
             # TERRA
@@ -79,14 +79,14 @@ async def root():
         results = await asyncio.gather(*tasks)
 
         names = [
-            "GamesRadar (Main)", "GamesRadar (Feed)", "GameSpot (Main)", "GameSpot (Latest)", 
-            "Adrenaline", "G1", "Nosso Palestra", "IGN", "InfoMoney", "Terra", "UOL"
+            "GamesRadar", "GamesRadar", "GameSpot", "GameSpot", "IGN",
+            "Adrenaline", "G1", "Nosso Palestra", "InfoMoney", "Terra", "UOL"
         ]
         
         links = [
-            "https://www.gamesradar.com/", "https://www.gamesradar.com/", "https://www.gamespot.com/", "https://www.gamespot.com/", 
+            "https://www.gamesradar.com/", "https://www.gamesradar.com/", "https://www.gamespot.com/", "https://www.gamespot.com/", "https://br.ign.com/",
             "https://www.adrenaline.com.br/", "https://g1.globo.com/", 
-            "https://nossopalestra.com.br/", "https://br.ign.com/", "https://www.infomoney.com.br/", "https://www.terra.com.br/", "https://www.uol.com.br/"
+            "https://nossopalestra.com.br/", "https://www.infomoney.com.br/", "https://www.terra.com.br/", "https://www.uol.com.br/"
         ]
         
         return [
