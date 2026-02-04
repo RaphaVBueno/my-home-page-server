@@ -3,6 +3,8 @@ import httpx
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from bs4 import BeautifulSoup
+import requests
+
 
 app = FastAPI()
 
@@ -59,8 +61,8 @@ async def root():
             fetch_news(client, 'https://kotaku.com/', 'div', title_tag='h3', title_class='font-bold', container_id=None),
             # IGN BRASIL
             fetch_news(client, 'https://br.ign.com/cinema-tv', 'section', 'broll', 'span', 'caption'),
-            # ADRENALINE
-            fetch_news(client, 'https://www.adrenaline.com.br/hardware/', 'h2', 'feed-title'),
+            # ADRENALINE - Últimos Conteúdos
+            fetch_news(client, 'https://www.adrenaline.com.br/', 'article', 'feed-3-list-tags', 'h3', 'feed-title'),
             # G1
             fetch_news(client, 'https://g1.globo.com/', 'div', 'feed-post-body-title', 'p'),
             # NOSSO PALESTRA
