@@ -3,7 +3,6 @@ import httpx
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from bs4 import BeautifulSoup
-import requests
 
 
 app = FastAPI()
@@ -52,9 +51,9 @@ async def root():
     async with httpx.AsyncClient(headers=HEADERS, follow_redirects=True) as client:
         tasks = [
             # GAMES RADAR - Principal
-            fetch_news(client, 'https://www.gamesradar.com/', 'div', 'feature-block-item-wrapper item-1', 'span', 'article-name'),
+            fetch_news(client, 'https://www.gamesradar.com/', 'div', 'wdn-listv2-item-content', 'h2', 'wdn-listv2-item-content-title'),
             # GAMES RADAR - Últimas
-            fetch_news(client, 'https://www.gamesradar.com/', 'div', 'list-text-links', 'h3', 'article-name'),
+            fetch_news(client, 'https://www.gamesradar.com/', 'h3', 'article-name'),
             # KOTAKU - Principal
             fetch_news(client, 'https://kotaku.com/', 'h2', 'font-bold'),
             # KOTAKU - Últimas
